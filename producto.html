@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeParfum - Productos</title>
+<style>
+  body {
+    background: #0a0a0a;
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    margin: 0; padding: 0;
+  }
+  header, footer {
+    background: #111;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 2.4em;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
+    user-select: none;
+  }
+  nav {
+    background: #1c1c1c;
+    display: flex;
+    justify-content: center;
+    padding: 15px 10px;
+    box-shadow: inset 0 -3px 10px rgba(212,175,55,0.4);
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  nav a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+  }
+  nav a:hover, nav a:focus {
+    color: #fff3b0;
+  }
+  nav a:hover::after, nav a:focus::after {
+    width: 100%;
+  }
+  .container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .card {
+    background: #111;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #3a2e00;
+    width: 220px;
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #d4af37;
+  }
+  .card img {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    height: 280px;
+    object-fit: cover;
+  }
+  .card h3 {
+    margin: 15px 0 10px;
+    font-weight: 700;
+    font-size: 1.3em;
+    letter-spacing: 0.5px;
+  }
+  .card p {
+    font-weight: bold;
+    margin: 5px 0 15px;
+    font-size: 1.1em;
+    color: #d4af37;
+  }
+  .card button {
+    background: #d4af37;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #000;
+    font-size: 1em;
+    transition: background 0.3s ease;
+    margin-bottom: 10px;
+  }
+  .card button:hover {
+    background: #bfa337;
+  }
+  footer {
+    background: #111;
+    color: #7a7a7a;
+    font-size: 0.9rem;
+    margin-top: 50px;
+    user-select: none;
+  }
+
+  /* Responsividad */
+  @media (max-width: 992px) {
+    .container {
+      justify-content: space-around;
+    }
+  }
+  @media (max-width: 768px) {
+    header, footer {
+      font-size: 2em;
+      padding: 18px 10px;
+    }
+    nav a {
+      font-size: 1.1em;
+      margin: 0 10px;
+    }
+    .card {
+      width: 45%;
+      margin-bottom: 20px;
+    }
+    .card img {
+      height: 250px;
+    }
+  }
+  @media (max-width: 480px) {
+    nav {
+      gap: 15px;
+      padding: 10px 5px;
+    }
+    .card {
+      width: 90%;
+    }
+    .card img {
+      height: 200px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>LeParfum</header>
+
+<nav>
+  <a href="index.html">Inicio</a>
+  <a href="producto.html">Productos</a>
+  <a href="carrito.html">Carrito</a>
+</nav>
+
+<div class="container" id="productos-container">
+  <div class="card" data-id="1" data-nombre="Chanel No 5" data-precio="120" data-img="img/chanel.png">
+    <img src="img/chanel.png" alt="Chanel No 5" />
+    <h3>Chanel No 5</h3>
+    <p>Precio: $120</p>
+    <button onclick="agregarAlCarrito(1)">Agregar al carrito</button>
+  </div>
+  <div class="card" data-id="2" data-nombre="Dior Sauvage" data-precio="150" data-img="img/dior.png">
+    <img src="img/dior.png" alt="Dior Sauvage" />
+    <h3>Dior Sauvage</h3>
+    <p>Precio: $150</p>
+    <button onclick="agregarAlCarrito(2)">Agregar al carrito</button>
+  </div>
+  <div class="card" data-id="3" data-nombre="Versace Eros" data-precio="130" data-img="img/versace.png">
+    <img src="img/versace.png" alt="Versace Eros" />
+    <h3>Versace Eros</h3>
+    <p>Precio: $130</p>
+    <button onclick="agregarAlCarrito(3)">Agregar al carrito</button>
+  </div>
+  <div class="card" data-id="4" data-nombre="AB The Icon" data-precio="140" data-img="img/Ab.png">
+    <img src="img/Ab.png" alt="AB The Icon" />
+    <h3>AB The Icon</h3>
+    <p>Precio: $140</p>
+    <button onclick="agregarAlCarrito(4)">Agregar al carrito</button>
+  </div>
+</div>
+
+<footer>© 2025 LeParfum - Todos los derechos reservados.</footer>
+
+<script>
+  function agregarAlCarrito(id) {
+    const card = document.querySelector(`.card[data-id="${id}"]`);
+    const producto = {
+      id: id,
+      nombre: card.getAttribute('data-nombre'),
+      precio: parseFloat(card.getAttribute('data-precio')),
+      img: card.getAttribute('data-img'),
+      cantidad: 1
+    };
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    const index = carrito.findIndex(p => p.id === id);
+    if(index > -1){
+      carrito[index].cantidad++;
+    } else {
+      carrito.push(producto);
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(`${producto.nombre} agregado al carrito`);
+  }
+</script>
+
+</body>
+</html>

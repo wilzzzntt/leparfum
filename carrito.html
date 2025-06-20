@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeParfum - Carrito</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: #111;
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+  }
+  header {
+    background: linear-gradient(90deg, #000000, #1a1a1a);
+    color: #d4af37;
+    padding: 25px 20px;
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+    user-select: none;
+  }
+  nav {
+    background: #1c1c1c;
+    display: flex;
+    justify-content: center;
+    padding: 15px 10px;
+    box-shadow: inset 0 -3px 10px rgba(212,175,55,0.4);
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  nav a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+  }
+  nav a:hover {
+    color: #fff3b0;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  .carrito-container {
+    max-width: 900px;
+    background: #1c1c1c;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(212,175,55,0.6);
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(212,175,55,0.8);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d4af37;
+    padding: 15px 0;
+  }
+  li img {
+    width: 60px;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  li div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  li strong {
+    font-size: 1.2rem;
+  }
+  li button {
+    background: #b22222;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  li button:hover {
+    background: #800000;
+  }
+  #finalizar-btn {
+    margin: 30px auto 0;
+    display: block;
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  #finalizar-btn:hover {
+    background: #bfa337;
+  }
+
+  /* Modal */
+  #modal {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  #modal > div {
+    background:#1c1c1c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(212,175,55,0.7);
+    width: 90%;
+    max-width: 400px;
+  }
+  #modal h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  #modal input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: #fff;
+  }
+  #modal button {
+    padding: 12px 20px;
+    margin-top: 10px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+  }
+  #modal button[type="submit"] {
+    background: #d4af37;
+    color: #000;
+  }
+  #modal button#cancelar {
+    background: #800000;
+    color: #fff;
+    margin-left: 10px;
+  }
+
+  footer {
+    background: #000;
+    color: #777;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 480px) {
+    header {
+      font-size: 2rem;
+      padding: 20px 10px;
+    }
+    nav a {
+      font-size: 1rem;
+      padding-bottom: 3px;
+    }
+    .carrito-container {
+      margin: 30px 10px;
+      padding: 20px;
+    }
+    li {
+      flex-direction: column;
+      text-align: center;
+    }
+    li div {
+      justify-content: center;
+    }
+    li img {
+      margin-bottom: 10px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<header>LeParfum</header>
+
+<nav>
+  <a href="index.html">Inicio</a>
+  <a href="producto.html">Productos</a>
+  <a href="carrito.html">Carrito</a>
+</nav>
+
+<div class="carrito-container">
+  <h2>Carrito de Compras</h2>
+  <ul id="lista-carrito">
+    <!-- Productos se cargarán dinámicamente -->
+  </ul>
+  <button id="finalizar-btn">Finalizar Compra</button>
+</div>
+
+<div id="modal">
+  <div>
+    <h3>Confirmar Compra</h3>
+    <p>Completa tus datos para finalizar la compra:</p>
+    <form id="form-compra">
+      <input type="text" id="nombre" placeholder="Nombre completo" required />
+      <input type="email" id="email" placeholder="Correo electrónico" required />
+      <div style="margin-top: 15px;">
+        <button type="submit">Confirmar</button>
+        <button type="button" id="cancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>© 2025 LeParfum - Todos los derechos reservados.</footer>
+
+<script>
+  function mostrarCarrito() {
+    const lista = document.getElementById('lista-carrito');
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    lista.innerHTML = '';
+
+    if(carrito.length === 0){
+      lista.innerHTML = '<li>El carrito está vacío.</li>';
+      return;
+    }
+
+    carrito.forEach(producto => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div>
+          <img src="${producto.img}" alt="${producto.nombre}" />
+          <strong>${producto.nombre}</strong> - $${producto.precio} x ${producto.cantidad}
+        </div>
+        <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+      `;
+      lista.appendChild(li);
+    });
+  }
+
+  function eliminarDelCarrito(id) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito = carrito.filter(p => p.id !== id);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    mostrarCarrito();
+  }
+
+  const modal = document.getElementById('modal');
+  const btnFinalizar = document.getElementById('finalizar-btn');
+  const btnCancelar = document.getElementById('cancelar');
+  const formCompra = document.getElementById('form-compra');
+
+  btnFinalizar.addEventListener('click', () => {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    if(carrito.length === 0) {
+      alert('Tu carrito está vacío.');
+      return;
+    }
+    modal.style.display = 'flex';
+  });
+
+  btnCancelar.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  formCompra.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if(nombre === '' || email === '') {
+      alert('Completa todos los campos.');
+      return;
+    }
+
+    alert(`Gracias ${nombre}, tu compra ha sido realizada. Te contactaremos a ${email}.`);
+    localStorage.removeItem('carrito');
+    modal.style.display = 'none';
+    mostrarCarrito();
+  });
+
+  mostrarCarrito();
+</script>
+
+</body>
+</html>
